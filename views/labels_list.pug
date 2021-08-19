@@ -1,0 +1,12 @@
+extends catalog 
+block category 
+    div.page_title
+        h2= title 
+    ul.labels_list 
+        each label in labels_list
+            li 
+                h5 #{label.name}
+                a(href=label.url) View label 
+        else 
+            li 
+                p There are no record labels to display.

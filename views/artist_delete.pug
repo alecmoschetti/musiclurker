@@ -1,0 +1,27 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 #{title}
+    div.artist_profile
+        h3= artist.name
+        p= artist.profile 
+    if albums.length 
+        div.delete_others_message
+            p.warning Delete the following albums before attempting to delete this artist.
+            h3 Albums 
+            div.albums_container
+                ul 
+                    each album in albums 
+                        li 
+                            p #{album.title}
+                            p Date released: #{album.date_released_formatted}
+                            a(href=album.url) View album
+    else 
+        div.delete_message
+            p Do you really want to delete this Author?
+            form(method='POST' action='')
+                fieldset
+                    input#artist_id(type='hidden' name='artist_id', required='true', value=artist._id )
+                    label(for="admin_password") Admin password: 
+                    input#admin_password(type='password' name='admin_password' required='true')
+                button(type='submit' class='button') Delete

@@ -1,0 +1,20 @@
+extends catalog 
+block category
+    div.page_title
+        h2= title 
+    form(method='POST' enctype="multipart/form-data" action='')
+        fieldset.artist_form
+            label(for="artist_name") Artist Name: 
+            input#artist_name(type='text' placeholder='Artist name' name='artist_name' required='true' value=(artist===undefined ? '' : artist.name) )
+            label(for="artist_profile") Artist Profile: 
+            textarea#artist_profile(placeholder='Profile' name='artist_profile') #{artist===undefined ? '' : artist.profile}
+            label(for="portrait") Portrait: 
+            input(type='file' name='portrait' id='portrait' value=(album === undefined ? '' : album.portrait) )
+            if (updating)
+                label(for="admin_password") Admin password: 
+                input#admin_password(type='password' name='admin_password' required='true')
+        button(type='submit' class='button') Submit
+    if errors
+        ul 
+            for error in errors 
+                li!= error.msg

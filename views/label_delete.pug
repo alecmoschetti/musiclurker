@@ -1,0 +1,21 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 #{title}: #{label.name}
+    if albums.length 
+        section.delete_others_message
+            p.warning Delete the following albums before attempting to delete this label.
+            h3 Albums:  
+            ul.delete_albums_list 
+                each album in albums 
+                    li 
+                        a(href=album.url) #{album.title}
+    else 
+        div.delete_message
+            p Do you really want to delete this Label?
+            form(method='POST' action='')
+                fieldset
+                    input#labelid(type='hidden' name='labelid' required='true' value=label._id)
+                    label(for="admin_password") Admin password: 
+                    input#admin_password(type='password' name='admin_password' required='true')
+                button(type='submit' class='button') Delete

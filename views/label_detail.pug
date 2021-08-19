@@ -1,0 +1,33 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 Label: #{label.name}
+    div.label_detail_container 
+        div.label_location
+            h3 Location: 
+            p #{label.location}
+        section.albums_container 
+            h3 Albums: 
+            ul.albums_list 
+                each album in albums 
+                    li 
+                        div.album_cover 
+                            img(src=album.cover alt='album cover')
+                        div
+                            a(href=album.url) #{album.title} 
+                            br
+                            a(href=album.artist.url) #{album.artist.name}
+                            p Date released: #{album.date_released_formatted}
+                            p Genres: 
+                            ul
+                                for genre in album.genre
+                                    li 
+                                        a(href=genre.url) #{genre.name}
+                else 
+                    li 
+                        p #{label.name} has no albums to display.
+    section.controls 
+        p 
+            a(href=label.url+'/delete' class='button button_delete') Delete label 
+        p 
+            a(href=label.url+'/update' class='button button_update') Update label

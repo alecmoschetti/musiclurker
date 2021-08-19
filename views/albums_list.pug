@@ -1,0 +1,15 @@
+extends catalog 
+block category 
+    div.page_title
+        h2= title 
+    ul.albums_list
+        - albums_list.sort((a, b) => a.title.toUpperCase() < b.title.toUpperCase() ? -1 : a.title.toUpperCase() > b.title.toUpperCase() ? 1 : 0);
+        each album in albums_list 
+            li 
+                a(href=album.url) #{album.title}
+                |   (#{album.artist.name})
+                div.album_cover
+                    img(src=album.cover)
+        else 
+            li 
+                p There are no albums to display.

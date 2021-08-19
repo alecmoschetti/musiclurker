@@ -1,0 +1,23 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 Genre: #{genre.name}
+    div.genre_description
+        p #{genre.description}
+    section.albums_container
+        h3 Albums 
+        ul.albums_list 
+            each album in albums 
+                li 
+                    img(src=album.cover alt='album cover')
+                    br
+                    a(href=album.url) Album: #{album.title} 
+                    br
+                    a(href=album.artist.url) Artist: #{album.artist.name}
+            else 
+                p #{genre.name} has no albums to display.
+    section.controls 
+        p 
+            a(href=genre.url+'/delete' class='button button_delete') Delete genre 
+        p 
+            a(href=genre.url+'/update' class='button button_update') Update genre

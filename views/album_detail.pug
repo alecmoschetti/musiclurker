@@ -1,0 +1,23 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 Album: #{album.title}
+    div.album_cover
+        img(src=album.cover)
+    div.album_info
+        p Artist: 
+            a(href=album.artist.url) #{album.artist.name}
+        p Released: #{album.date_released_formatted}
+        p Track length: #{album.tracks}
+        p Label: 
+            a(href=album.label.url) #{album.label.name}
+        p Genre: 
+            each val, index in album.genre
+                a(href=val.url) #{val.name}
+                if index < album.genre.length - 1
+                    |, 
+    section.controls 
+        p 
+            a(href=album.url+'/delete' class='button button_delete') Delete Album 
+        p 
+            a(href=album.url+'/update' class='button button_update') Update Album

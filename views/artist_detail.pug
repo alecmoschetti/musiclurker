@@ -1,0 +1,36 @@
+extends catalog 
+
+block category 
+    div.page_title
+        div.artist_name 
+            h2 Artist: #{artist.name} 
+    div.artist_profile
+        h4 Profile: 
+        p #{artist.profile}
+        div.artist_portrait
+            img(src=artist.portrait alt="portrait of artist")
+    section.albums_container 
+        h3 Albums:
+        ul 
+            each album in albums 
+                li 
+                    div 
+                        h4 #{album.title} 
+                        a(href=album.url) Go to album
+                        div.album_cover
+                            img(src=album.cover alt="album cover")
+                        p Date released: #{album.date_released_formatted}
+                        p Genre:
+                        ul
+                            for genre in album.genre 
+                                li 
+                                    p
+                                        a(href=genre.url) #{genre.name}
+            else 
+                li 
+                    p #{artist.name} has no albums to display.
+    section.controls 
+        p 
+            a(href=artist.url+'/delete' class='button button_delete') Delete artist 
+        p 
+            a(href=artist.url+'/update' class='button button_update') Update artist

@@ -1,0 +1,25 @@
+extends layout 
+
+block content 
+    section.catalog_wrapper
+        block category
+                ul.create_nav 
+                    li.create_button
+                        a(href='/catalog/artists/create') Create new artist
+                    li.create_button 
+                        a(href='/catalog/albums/create') Create new album
+                    li.create_button 
+                        a(href='/catalog/labels/create') Create new label
+                    li.create_button 
+                        a(href='/catalog/genres/create') Create new genre
+                section.catalog_count_container
+                    h1= title 
+                    ul.catalog_count_info 
+                        li 
+                            a(href='/catalog/artists') Artists: #{results.artist_count} 
+                        li 
+                            a(href='/catalog/albums') Albums: #{results.album_count} 
+                        li 
+                            a(href='/catalog/labels') Labels: #{results.label_count} 
+                        li 
+                            a(href='/catalog/genres') Genres: #{results.genre_count} 

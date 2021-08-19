@@ -1,0 +1,46 @@
+extends catalog 
+block category 
+    div.page_title
+        h2= title 
+    form(method='POST' enctype="multipart/form-data" action='')
+        fieldset 
+            label(for="album_title") Title: 
+            input#album_title(type='text', placeholder='Title of album' name='album_title' required='true' value=(album===undefined ? '' : album.title) )
+            label(for="album_artist") Artist: 
+            select#album_artist(type='select', placeholder='Select artist' name='album_artist' required='true')
+                - artists.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0 );
+                for artist in artists 
+                    if album 
+                        option(value=artist._id selected=(artist._id.toString()===album.artist._id || artist._id.toString()===album.artist ? 'selected' : false) ) #{artist.name}
+                    else 
+                        option(value=artist._id) #{artist.name}
+            label(for="album_date_released") Date released:
+            input#album_date_released(type='date' name="album_date_released" value=(album===undefined ? '' : album.date_released_date_picker) )
+            label(for="album_tracks") Tracks: 
+            input#album_tracks(type='number' name='album_tracks' required='true' value=(album===undefined ? '' : album.tracks) )
+            label(for="album_label") Label: 
+            select#album_label(type='select', placeholder='Select label' name='album_label')
+                - labels.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0 );
+                for label in labels 
+                    if album 
+                        option(value=label._id selected=(label._id.toString()===album.label._id || label._id.toString()===album.label ? 'selected' : false) ) #{label.name}
+                    else 
+                        option(value=label._id) #{label.name}
+            label(for="cover") Cover: 
+            input(type='file' name='cover' id='cover' value=(album === undefined ? '' : album.cover) )
+            label(for="genre") Genre:            
+            div.checkboxes 
+                - genres.sort((a, b) => a.name.toUpperCase() < b.name.toUpperCase() ? -1 : a.name.toUpperCase() > b.name.toUpperCase() ? 1 : 0 );
+                for genre in genres 
+                    div.genre_list_item 
+                        label(for=genre._id) #{genre.name}
+                        input(id=genre._id, type='checkbox', name='genre' value=genre._id checked=genre.checked )
+            if (updating === true)
+                label(for="admin_password") Admin password: 
+                input#admin_password(type='password' name='admin_password' required='true')
+        button(type='submit' class='button') Submit 
+    if errors 
+        ul 
+            for error in errors 
+                li!= error.msg
+        

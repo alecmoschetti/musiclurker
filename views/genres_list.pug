@@ -1,0 +1,11 @@
+extends catalog 
+block category 
+    div.page_title
+        h2= title 
+    ul.genres_list 
+        each genre in genre_list 
+            li 
+                a(href=genre.url) #{genre.name}
+        else 
+            li 
+                p There are no genres to display.

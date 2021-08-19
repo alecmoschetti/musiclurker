@@ -1,0 +1,14 @@
+extends catalog
+block category
+    div.page_title
+        h2.artist_name= title
+    ul.artists_list 
+        each artist in artists_list
+            li 
+                h5 #{artist.name} 
+                a(href=artist.url) View artist 
+                div.artist_portrait
+                    img(src=artist.portrait)
+        else 
+            li 
+                p There are no artists to display.

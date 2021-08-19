@@ -1,0 +1,18 @@
+extends catalog 
+block category
+    div.page_title
+        h2= title 
+    form(method='POST' action='')
+        fieldset
+            label(for="label_name") Label Name: 
+            input#label_name(type='text' placeholder='Label name' name='label_name' required='true' value=(label===undefined ? '' : label.name) )
+            label(for="label_location") Label Location: 
+            input#label_location(placeholder='Location' name='label_location' value=(label===undefined ? '' : label.location) )
+            if (updating)
+                label(for="admin_password") Admin password: 
+                input#admin_password(type='password' name='admin_password' required='true')
+        button(type='submit' class='button') Submit
+    if errors
+        ul 
+            for error in errors 
+                li!= error.msg

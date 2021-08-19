@@ -1,0 +1,12 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 #{title}: #{album.title}
+    div.delete_message
+        p Do you really want to delete this album?
+        form(method='POST' action='')
+            fieldset
+                input#albumid(type='hidden' name='albumid' required='true' value=(album._id) )
+                label(for="admin_password") Admin password: 
+                input#admin_password(type='password' name='admin_password' required='true')
+            button(type='submit' class='button') Delete

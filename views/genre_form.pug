@@ -1,0 +1,14 @@
+extends catalog 
+block category 
+    div.page_title
+        h2 #{title}
+    form(method='POST' action='')
+        fieldset 
+            label(for="genre_name") Genre: 
+            input#genre_name(type='text' placeholder='Rock, Rap, Acapella, etc.' name='genre_name' required='true' value=(genre === undefined ? '' : genre.name))
+            label(for="genre_description") Description: 
+            textarea#genre_description(type='textarea' placeholder='Description' name='genre_description' required='true') #{genre === undefined ? '' : genre.description}
+            if (updating)
+                label(for="admin_password") Admin password: 
+                input#admin_password(type='password' name='admin_password' required='true')
+        button(type='submit' class='button') Submit
