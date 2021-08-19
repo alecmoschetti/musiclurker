@@ -17,7 +17,7 @@ const app = express();
 
 /* set up mongoose connection */
 const mongoose = require('mongoose');
-const dev_db_url = 'mongodb+srv://alecmoschetti:alecmoschetti@cluster0.fqkmg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const dev_db_url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fqkmg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 const db = mongoose.connection;
